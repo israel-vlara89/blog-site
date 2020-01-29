@@ -24,18 +24,23 @@ app.get("/", (req, res) => {
 app.get("/about", (req, res) => {
   res.render("about", {
     about: aboutContent
-  })
-})
+  });
+});
 
 app.get("/contact", (req, res) => {
   res.render("contact", {
     contact: contactContent
-  })
+  });
+});
+
+app.get("/compose", (req, res) =>{
+  res.render("compose");
 })
 
-
-
-
+app.post('/compose', function (req, res) {
+  console.log(req.body.title);
+  console.log(req.body.post);
+});
 
 
 
