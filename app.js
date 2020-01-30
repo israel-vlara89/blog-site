@@ -15,9 +15,11 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+let posts = [];
+
 app.get("/", (req, res) => {
   res.render("home", {
-    home: homeStartingContent
+    home: homeStartingContent,
   });
 });
 
@@ -37,12 +39,21 @@ app.get("/compose", (req, res) =>{
   res.render("compose");
 })
 
-app.post('/compose', function (req, res) {
-  console.log(req.body.title);
-  console.log(req.body.post);
+app.post('/compose', (req, res) => {
+  
+  const post = {
+    title: req.body.postTitle,
+    content: req.body.postBody
+  };
+  posts.push(post);
+  console.log(posts);
+  res.redirect("/")
+  
 });
 
-
+app.get("/posts/:postName", (req, res) => {
+  var requested = req.params.postName;
+})
 
 
 
