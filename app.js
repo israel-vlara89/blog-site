@@ -20,6 +20,7 @@ let posts = [];
 app.get("/", (req, res) => {
   res.render("home", {
     home: homeStartingContent,
+    posts: posts
   });
 });
 
@@ -52,8 +53,18 @@ app.post('/compose', (req, res) => {
 });
 
 app.get("/posts/:postName", (req, res) => {
-  var requested = req.params.postName;
-})
+  var requestedTitle = req.params.postName;
+  posts.forEach(function(post){
+    var reqTitle = post.title;
+    var storedTitle = reqTitle.toLowerCase();
+
+    if (storedTitle === requestedTitle){
+      console.log("Match found.");
+    }else {
+      console.log("No match found.");
+    }
+  });
+});
 
 
 
